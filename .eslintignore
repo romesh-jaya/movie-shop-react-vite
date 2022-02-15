@@ -1,0 +1,15 @@
+// .eslintignore
+ 
+build 
+dist
+node_modules
+cypress
+.firebase
+.idea
+.vscode
+**/*.svg
+**/*.png
+**/*.css
+**/*.scss
+**/*.json
+**/*.js
