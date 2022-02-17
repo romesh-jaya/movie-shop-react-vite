@@ -8,6 +8,7 @@ module.exports = {
     colors: {
       "header-start": "#3478c1",
       black: colors.black,
+      red: colors.red,
     },
   },
   plugins: [],
