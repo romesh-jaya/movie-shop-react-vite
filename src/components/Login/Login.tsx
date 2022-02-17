@@ -43,18 +43,19 @@ const Login: React.FC = () => {
   }
 
   return !isAuthenticated ? (
-    <>
-      <div class="mt-5">
-        {!isAdminLogin
-          ? "Welcome! Sign in to browse movies and TV series at Ultra Movie Shop"
-          : null}
+    <div class="flex flex-col bg-black w-full h-full align-middle justify-center">
+      <div class="w-11/12 m-auto text-center">
+        <div class="mt-5">
+          {!isAdminLogin &&
+            "Welcome! Sign in to browse movies and TV series at Ultra Movie Shop"}
+        </div>
+        <div className="pt-10 text-center">
+          <button onClick={onLogin}>
+            {isAdminLogin ? "Sign in - Admin" : "Sign in"}
+          </button>
+        </div>
       </div>
-      <div className="pt-10 text-center m-auto">
-        <button onClick={onLogin}>
-          {isAdminLogin ? "Sign in - Admin" : "Sign in"}
-        </button>
-      </div>
-    </>
+    </div>
   ) : (
     <Navigate to="/" />
   );

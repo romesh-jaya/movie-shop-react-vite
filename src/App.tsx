@@ -8,7 +8,7 @@ function App() {
       <div class="flex flex-col items-center h-full">
         <Header />
         <Routes>
-          <Route path="/login" element={Login} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -8,6 +8,11 @@ body {
   margin: 0;
   font-family: "Open Sans";
   color: white;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 a {
