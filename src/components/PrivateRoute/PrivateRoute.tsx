@@ -4,15 +4,15 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const PrivateRoute = () => {
   const location = useLocation();
-  const { isAuthenticated, user } = useAuth0();
-  const isAuthRef = useRef<boolean>(false);
+  const { user, isLoading, isAuthenticated, error } = useAuth0();
+  const isAuthRef = useRef(false);
 
   if (isAuthenticated && !isAuthRef.current) {
     isAuthRef.current = true;
     console.log("Sign in success", user && user?.email);
   }
 
-  return isAuthenticated ? (
+  return isAuthenticated || isLoading || error ? (
     <Outlet />
   ) : (
     <Navigate to={{ pathname: "/login" }} state={{ from: location }} />

@@ -9,7 +9,7 @@ export default function Header() {
             alt="Ultra Logo"
             width="165px"
             height="72px"
-            src="/public/images/logo.png"
+            src="/images/logo.png"
             class="pt-2 cursor-pointer"
           ></img>
         </Link>
