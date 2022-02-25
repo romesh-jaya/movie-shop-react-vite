@@ -1,8 +1,13 @@
 import Header from "./components/Header/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Home from "./components/Home/Home";
+
+library.add(faGear);
 
 function App() {
   return (
