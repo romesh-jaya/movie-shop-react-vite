@@ -12,7 +12,8 @@ module.exports = {
     },
     colors: {
       "header-start": "#3478c1",
-      black: colors.black,
+      // note: import only the color palettes we need, otherwise bundle size will increase
+      black: colors.black, // note: black color doesn't have shades
       red: colors.red,
       gray: colors.gray,
       blue: colors.blue,
