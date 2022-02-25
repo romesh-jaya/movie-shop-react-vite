@@ -1,13 +1,10 @@
 import React from "react";
-import * as styles from "./spinner.module.css";
 
 const Spinner: React.FC = () => {
   return (
-    <>
-      <div className={styles["spinner-body"]}>
-        <div className={styles["loading-spinner"]} />
-      </div>
-    </>
+    <div class="flex h-full justify-center items-center flex-1">
+      <div class="pointer-events-none w-10 h-10 border-4 border-solid border-transparent border-gray-200 border-t-header-start rounded-full animate-spin" />
+    </div>
   );
 };
 

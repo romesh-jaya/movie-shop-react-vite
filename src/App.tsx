@@ -9,12 +9,14 @@ function App() {
     <BrowserRouter>
       <div class="flex flex-col items-center h-full">
         <Header />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<Home />} />
-          </Route>
-        </Routes>
+        <div class="flex flex-col bg-black w-full h-full align-middle justify-center">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/" element={<Home />} />
+            </Route>
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );

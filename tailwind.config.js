@@ -15,6 +15,7 @@ module.exports = {
       black: colors.black,
       red: colors.red,
       gray: colors.gray,
+      blue: colors.blue,
     },
   },
   plugins: [],

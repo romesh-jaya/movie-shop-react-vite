@@ -9,7 +9,7 @@ const PrivateRoute = () => {
 
   if (isAuthenticated && !isAuthRef.current) {
     isAuthRef.current = true;
-    console.log("Sign in success", user && user?.email);
+    console.info("Sign in success", user && user?.email);
   }
 
   return isAuthenticated || isLoading || error ? (
