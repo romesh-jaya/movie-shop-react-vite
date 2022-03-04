@@ -29,6 +29,7 @@ const extraReducers = (
           value: action.payload,
           loading: false,
           error: "No movies returned from server",
+          fetched: true,
         };
       }
 

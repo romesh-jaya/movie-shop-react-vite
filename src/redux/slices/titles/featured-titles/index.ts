@@ -6,12 +6,14 @@ export interface IFeaturedTitlesState {
   value: MovieLibrary[];
   loading: boolean;
   error: string;
+  fetched: boolean;
 }
 
 const initialState: IFeaturedTitlesState = {
   value: [],
   loading: true,
   error: "",
+  fetched: false,
 };
 
 export const featuredTitles = createSlice({
