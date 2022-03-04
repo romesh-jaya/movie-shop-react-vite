@@ -6,7 +6,8 @@ export const fetchFeaturedTitles = createAsyncThunk(
   "featuredTitles",
   async () => {
     const response = await axios.get(
-      `${import.meta.env.VITE_NODE_SERVER}/movies`
+      `${import.meta.env.VITE_NODE_SERVER}/movies`,
+      { params: { featured: true, queryAll: true } }
     );
     return response.data.movies.movies;
   }
