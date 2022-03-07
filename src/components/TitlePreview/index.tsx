@@ -27,15 +27,17 @@ export default function TitlePreview(props: IProps) {
   */
 
   return (
-    <div className={"styles.container"}>
-      <div className={"styles.poster"}>
+    <div class="w-48 m-auto shrink-0">
+      <div class="shrink-0 cursor-pointer">
         <img src={mediaURL ?? portraitImage} alt={title} />
       </div>
       <div>
-        <p className={"styles.title"}>{title}</p>
-        <div className="info-line">
-          <div className={"styles.year"}>{year}</div>
-          <div className={"styles.type"}>
+        <p class="text-base mb-2 mt-1 whitespace-nowrap text-ellipsis overflow-hidden">
+          {title}
+        </p>
+        <div class="flex">
+          <div class="flex-1">{year}</div>
+          <div class="border-2 border-solid border-white">
             {type === MovieType.Movie ? "mov" : "tv"}
           </div>
         </div>

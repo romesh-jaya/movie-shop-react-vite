@@ -38,7 +38,7 @@ function App() {
       <BrowserRouter>
         <div class="flex flex-col items-center h-full">
           <Header />
-          <div class="flex flex-col bg-black w-full h-full align-middle justify-center">
+          <div class="flex flex-col flex-1 bg-black w-full align-middle justify-center">
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<PrivateRoute />}>

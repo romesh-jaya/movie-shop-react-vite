@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../../common/Spinner/Spinner";
 import { useLocation, Navigate } from "react-router-dom";
 import Button from "../../common/Button";
+import { titleBase } from "../../constants/appConstants";
 
 // Note: the Auth0 hosted Universal classic login screen has been customized in order to pass a custom
 //       param - passwordLoginOnly. The customized login screen can be accessed via:
@@ -47,7 +48,7 @@ const Login: React.FC = () => {
     <div class="w-11/12 m-auto text-center">
       <div class="mt-5">
         {!isAdminLogin &&
-          "Welcome! Sign in to browse movies and TV series at Ultra Movie Shop"}
+          `Welcome! Sign in to browse movies and TV series at ${titleBase}`}
       </div>
       <div className="pt-10 text-center">
         <Button onClick={onLogin}>

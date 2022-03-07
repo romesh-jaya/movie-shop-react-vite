@@ -1,4 +1,4 @@
-@import '../../styles/globalTheme.scss';
+@import "../../styles/globalTheme.scss";
 
 .poster {
   flex-shrink: 0;
@@ -22,12 +22,6 @@
     width: var(--thumbnail-width-px);
     height: var(--thumbnail-height-px);
   }
-}
-
-.container {
-  width: var(--thumbnail-width-px);
-  margin: auto;
-  flex-shrink: 0;
 }
 
 .title {

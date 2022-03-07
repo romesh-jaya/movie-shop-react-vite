@@ -37,7 +37,7 @@ export default function TitleCarousel(props: IProps) {
     const slides: ReactElement[] = [];
     titles.forEach((movie, idx) => {
       slides.push(
-        <Slide index={idx} key={movie.imdbID} className={"styles.slide"}>
+        <Slide index={idx} key={movie.imdbID} class="!px-1 !py-0">
           <TitlePreview
             title={movie.title}
             year={movie.year}
@@ -52,8 +52,8 @@ export default function TitleCarousel(props: IProps) {
 
   // Note: naturalSlideWidth and naturalSlideHeight are ignored when isIntrinsicHeight is set
   return (
-    <div className={"styles.container"} ref={containerRef}>
-      <div className={"styles.title"}>{sectionTitle}</div>
+    <div class="w-full relative" ref={containerRef}>
+      <div class="text-base font-bold mb-4">{sectionTitle}</div>
       <CarouselProvider
         naturalSlideWidth={10}
         naturalSlideHeight={10}
