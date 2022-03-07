@@ -4,13 +4,14 @@ import Spinner from "../../common/Spinner/Spinner";
 import { useAppDispatch, useAppSelector } from "../../redux";
 import { fetchFeaturedTitles } from "../../redux/slices/titles/featured-titles/functions";
 import HeroCarousel from "../HeroCarousel";
+import TitleCarousel from "../TitleCarousel";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const { isLoading, error: authError, isAuthenticated, user } = useAuth0();
   const {
     error: fetchError,
-    value,
+    value: featuredTitles,
     loading: loadingData,
     fetched,
   } = useAppSelector((state) => state.featuredTitles);
@@ -22,8 +23,6 @@ const Home = () => {
       dispatch(fetchFeaturedTitles());
     }
   }, [fetched, isAuthenticated]);
-
-  console.log("data", value);
 
   if (isLoading || loadingData) {
     renderContent = <Spinner />;
@@ -43,6 +42,9 @@ const Home = () => {
     renderContent = (
       <div>
         <HeroCarousel />
+        {featuredTitles.length > 0 && (
+          <TitleCarousel sectionTitle="Featured" titles={featuredTitles} />
+        )}
       </div>
     );
   }

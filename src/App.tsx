@@ -1,7 +1,11 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Header from "./components/Header/Header";
 import store from "./redux";
@@ -11,7 +15,7 @@ import Home from "./components/Home/Home";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "./axios";
 
-library.add(faGear);
+library.add(faGear, faAngleLeft, faAngleRight);
 
 const SERVER_PATH = import.meta.env.VITE_NODE_SERVER;
 
