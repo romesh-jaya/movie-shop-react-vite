@@ -29,7 +29,12 @@ export default function TitlePreview(props: IProps) {
   return (
     <div class="w-48 m-auto shrink-0">
       <div class="shrink-0 cursor-pointer">
-        <img src={mediaURL ?? portraitImage} alt={title} />
+        <img
+          src={mediaURL ?? portraitImage}
+          alt={title}
+          width={194}
+          height={287}
+        />
       </div>
       <div>
         <p class="text-base mb-2 mt-1 whitespace-nowrap text-ellipsis overflow-hidden">

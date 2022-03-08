@@ -16,6 +16,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const thumbnailGap = 20;
 const slideWidth = thumbnailWidth + thumbnailGap;
 
+const arrowBtnStyles =
+  "flex absolute top-11 translate-y-1/2 color-white hover-hover:hover:text-black text-2xl w-12 h-12 bg-black hover-hover:hover:bg-white rounded-full items-center justify-center border-2 border-solid border-gray-300 cursor-pointer";
+
 interface IProps {
   sectionTitle: string;
   titles: MovieLibrary[];
@@ -28,6 +31,9 @@ export default function TitleCarousel(props: IProps) {
 
   const visibleSlidesAtATime = Math.floor(containerWidth / slideWidth);
   const { width } = useContainerDimensions(containerRef);
+
+  console.log("width", width);
+  console.log("visibleSlidesAtATime", visibleSlidesAtATime);
 
   useEffect(() => {
     setContainerWidth(width);
@@ -53,20 +59,20 @@ export default function TitleCarousel(props: IProps) {
   // Note: naturalSlideWidth and naturalSlideHeight are ignored when isIntrinsicHeight is set
   return (
     <div class="w-full relative" ref={containerRef}>
-      <div class="text-base font-bold mb-4">{sectionTitle}</div>
+      <div class="w-full text-base font-bold mb-4">{sectionTitle}</div>
       <CarouselProvider
-        naturalSlideWidth={10}
-        naturalSlideHeight={10}
+        naturalSlideWidth={3}
+        naturalSlideHeight={3}
         totalSlides={titles.length}
-        isIntrinsicHeight
         visibleSlides={visibleSlidesAtATime}
         step={visibleSlidesAtATime}
+        isIntrinsicHeight
       >
         <Slider>{renderSlides()}</Slider>
-        <ButtonBack className={"btn-arrow back-button"}>
+        <ButtonBack class={arrowBtnStyles + " left-0"}>
           <FontAwesomeIcon icon="angle-left" />
         </ButtonBack>
-        <ButtonNext className={"btn-arrow next-button"}>
+        <ButtonNext class={arrowBtnStyles + " right-0"}>
           <FontAwesomeIcon icon="angle-right" />
         </ButtonNext>
       </CarouselProvider>

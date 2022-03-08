@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "pure-react-carousel/dist/react-carousel.es.css";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
 
