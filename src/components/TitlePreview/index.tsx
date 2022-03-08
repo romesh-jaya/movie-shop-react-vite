@@ -34,15 +34,16 @@ export default function TitlePreview(props: IProps) {
           alt={title}
           width={194}
           height={287}
+          class="w-32 h-48 md:w-48 md:h-72"
         />
       </div>
-      <div>
-        <p class="text-base mb-2 mt-1 whitespace-nowrap text-ellipsis overflow-hidden">
+      <div class="text-sm">
+        <p class="mb-2 mt-1 whitespace-nowrap text-ellipsis overflow-hidden">
           {title}
         </p>
         <div class="flex">
           <div class="flex-1">{year}</div>
-          <div class="border-2 border-solid border-white">
+          <div class="rounded-sm border-2 border-solid border-white px-1">
             {type === MovieType.Movie ? "mov" : "tv"}
           </div>
         </div>

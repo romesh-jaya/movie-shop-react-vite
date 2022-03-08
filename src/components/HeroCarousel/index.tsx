@@ -39,7 +39,7 @@ export default function HeroCarousel() {
       >
         <Slider>{renderSlides()}</Slider>
       </CarouselProvider>
-      <div class="max-w-screen-xl w-11/12 absolute bottom-10 left-0 right-0 mx-auto text-lg md:text-3xl text-center font-family: 'Amatic SC'">
+      <div class="max-w-screen-xl w-11/12 absolute bottom-10 left-0 right-0 mx-auto text-lg md:text-3xl text-center font-['Amatic_SC']">
         Ultra - Your one-stop destination for DVD&#39;s!
       </div>
     </div>

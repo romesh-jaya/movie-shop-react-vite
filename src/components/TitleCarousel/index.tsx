@@ -17,7 +17,7 @@ const thumbnailGap = 20;
 const slideWidth = thumbnailWidth + thumbnailGap;
 
 const arrowBtnStyles =
-  "flex absolute top-11 translate-y-1/2 color-white hover-hover:hover:text-black text-2xl w-12 h-12 bg-black hover-hover:hover:bg-white rounded-full items-center justify-center border-2 border-solid border-gray-300 cursor-pointer";
+  "flex absolute w-8 h-8 md:w-12 md:h-12 top-36 md:top-32 translate-y-1/2 color-white hover-hover:hover:text-black active:text-black text-2xl bg-black hover-hover:hover:bg-white active:bg-white rounded-full items-center justify-center border-2 border-solid border-gray-300 cursor-pointer";
 
 interface IProps {
   sectionTitle: string;
