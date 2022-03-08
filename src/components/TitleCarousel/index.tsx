@@ -7,11 +7,11 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 
-import { useContainerDimensions } from "../../hooks/useContainerDimensions";
 import { MovieLibrary } from "../../types/MovieLibrary";
 import TitlePreview from "../TitlePreview";
 import { thumbnailWidth } from "../../constants/appConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useWindowWidth } from "@react-hook/window-size";
 
 const thumbnailGap = 20;
 const slideWidth = thumbnailWidth + thumbnailGap;
@@ -30,10 +30,9 @@ export default function TitleCarousel(props: IProps) {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const visibleSlidesAtATime = Math.floor(containerWidth / slideWidth);
-  const { width } = useContainerDimensions(containerRef);
-
-  console.log("width", width);
-  console.log("visibleSlidesAtATime", visibleSlidesAtATime);
+  // note: I had to use Window width instead of parent container's width as the parent wouldn't shrink back when
+  // shrinking the window
+  const width = useWindowWidth();
 
   useEffect(() => {
     setContainerWidth(width);
@@ -57,7 +56,7 @@ export default function TitleCarousel(props: IProps) {
   };
 
   // Note: naturalSlideWidth and naturalSlideHeight are ignored when isIntrinsicHeight is set
-  return (
+  return visibleSlidesAtATime > 0 ? (
     <div class="w-full relative" ref={containerRef}>
       <div class="w-full text-base font-bold mb-4">{sectionTitle}</div>
       <CarouselProvider
@@ -68,7 +67,7 @@ export default function TitleCarousel(props: IProps) {
         step={visibleSlidesAtATime}
         isIntrinsicHeight
       >
-        <Slider>{renderSlides()}</Slider>
+        <Slider style={{ width: `${width}px` }}>{renderSlides()}</Slider>
         <ButtonBack class={arrowBtnStyles + " left-0"}>
           <FontAwesomeIcon icon="angle-left" />
         </ButtonBack>
@@ -77,5 +76,5 @@ export default function TitleCarousel(props: IProps) {
         </ButtonNext>
       </CarouselProvider>
     </div>
-  );
+  ) : null;
 }
