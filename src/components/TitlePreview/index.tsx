@@ -27,13 +27,11 @@ export default function TitlePreview(props: IProps) {
   */
 
   return (
-    <div class="w-48 m-auto shrink-0">
-      <div class="shrink-0 cursor-pointer">
+    <div class="w-32 md:w-48 m-auto shrink-0">
+      <div class="shrink-0 cursor-pointer hover-hover:hover:opacity-70 hover-hover:hover:outline-2 hover-hover:hover:outline-white hover-hover:hover:outline">
         <img
           src={mediaURL ?? portraitImage}
           alt={title}
-          width={194}
-          height={287}
           class="w-32 h-48 md:w-48 md:h-72"
         />
       </div>
@@ -43,7 +41,7 @@ export default function TitlePreview(props: IProps) {
         </p>
         <div class="flex">
           <div class="flex-1">{year}</div>
-          <div class="rounded-sm border-2 border-solid border-white px-1">
+          <div class="rounded-sm border-[1px] border-solid border-white px-1">
             {type === MovieType.Movie ? "mov" : "tv"}
           </div>
         </div>

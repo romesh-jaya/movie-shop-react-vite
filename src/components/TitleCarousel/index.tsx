@@ -9,15 +9,15 @@ import {
 
 import { MovieLibrary } from "../../types/MovieLibrary";
 import TitlePreview from "../TitlePreview";
-import { thumbnailWidth } from "../../constants/appConstants";
+import { screenXlPx } from "../../constants/appConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useWindowWidth } from "@react-hook/window-size";
+import { cssValue } from "../../utils/css";
 
 const thumbnailGap = 20;
-const slideWidth = thumbnailWidth + thumbnailGap;
 
 const arrowBtnStyles =
-  "flex absolute w-8 h-8 md:w-12 md:h-12 top-36 md:top-32 translate-y-1/2 color-white hover-hover:hover:text-black active:text-black text-2xl bg-black hover-hover:hover:bg-white active:bg-white rounded-full items-center justify-center border-2 border-solid border-gray-300 cursor-pointer";
+  "flex absolute w-8 h-8 md:w-12 md:h-12 top-28 md:top-32 translate-y-1/2 color-white hover-hover:hover:text-black active:text-black text-2xl bg-black hover-hover:hover:bg-white active:bg-white rounded-full items-center justify-center border-2 border-solid border-gray-300 cursor-pointer disabled:hidden";
 
 interface IProps {
   sectionTitle: string;
@@ -29,14 +29,20 @@ export default function TitleCarousel(props: IProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
+  // get the thumbnailWidth dynamically from CSS variable
+  const thumbnailWidth = parseInt(cssValue("--thumbnail-width"));
+  const slideWidth = thumbnailWidth + thumbnailGap;
   const visibleSlidesAtATime = Math.floor(containerWidth / slideWidth);
   // note: I had to use Window width instead of parent container's width as the parent wouldn't shrink back when
   // shrinking the window
-  const width = useWindowWidth();
+  const windowWidth = useWindowWidth();
 
   useEffect(() => {
-    setContainerWidth(width);
-  }, [width]);
+    // use the same width constraints as for the container
+    setContainerWidth(
+      windowWidth > screenXlPx ? screenXlPx : windowWidth * (11 / 12)
+    );
+  }, [windowWidth]);
 
   const renderSlides = () => {
     const slides: ReactElement[] = [];
@@ -67,7 +73,9 @@ export default function TitleCarousel(props: IProps) {
         step={visibleSlidesAtATime}
         isIntrinsicHeight
       >
-        <Slider style={{ width: `${width}px` }}>{renderSlides()}</Slider>
+        <Slider style={{ width: `${containerWidth}px` }}>
+          {renderSlides()}
+        </Slider>
         <ButtonBack class={arrowBtnStyles + " left-0"}>
           <FontAwesomeIcon icon="angle-left" />
         </ButtonBack>

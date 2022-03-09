@@ -36,9 +36,9 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div class="flex flex-col items-center h-full">
+        <div class="flex flex-col items-center min-h-full bg-black">
           <Header />
-          <div class="flex flex-col flex-1 bg-black w-full align-middle justify-center">
+          <div class="flex flex-col flex-1 max-w-screen-xl w-11/12 align-middle justify-center">
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<PrivateRoute />}>

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./styles/globalTheme.scss";
 
 html,
 body {
@@ -26,4 +27,12 @@ a {
 
 p {
   margin: 0;
+}
+
+:root {
+  --thumbnail-width: 192;
+
+  @media #{$sm} {
+    --thumbnail-width: 128;
+  }
 }

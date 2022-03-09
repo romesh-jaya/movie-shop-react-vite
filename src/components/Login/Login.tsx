@@ -45,7 +45,7 @@ const Login: React.FC = () => {
   }
 
   return !isAuthenticated ? (
-    <div class="w-11/12 m-auto text-center">
+    <div class="w-full m-auto text-center">
       <div class="mt-5">
         {!isAdminLogin &&
           `Welcome! Sign in to browse movies and TV series at ${titleBase}`}
