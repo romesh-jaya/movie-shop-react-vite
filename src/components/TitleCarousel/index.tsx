@@ -46,14 +46,15 @@ export default function TitleCarousel(props: IProps) {
 
   const renderSlides = () => {
     const slides: ReactElement[] = [];
-    titles.forEach((movie, idx) => {
+    titles.forEach((title, idx) => {
       slides.push(
-        <Slide index={idx} key={movie.imdbID} class="!px-1 !py-0">
+        <Slide index={idx} key={title.imdbID} class="!px-1 !py-0">
           <TitlePreview
-            title={movie.title}
-            year={movie.year}
-            type={movie.type}
-            imdbID={movie.imdbID}
+            title={title.title}
+            year={title.year}
+            type={title.type}
+            imdbID={title.imdbID}
+            mediaURL={title.mediaURL}
           />
         </Slide>
       );
