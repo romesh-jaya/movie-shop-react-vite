@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const dropDownButtons: NameValue[] = [{ name: "logout", value: "Logout" }];
 
 export default function Header() {
-  const { logout } = useAuth0();
+  const { logout, isAuthenticated } = useAuth0();
   const onMenuItemClicked = (dropDownButtonName: string) => {
     if (dropDownButtonName === "logout") {
       console.info("Sign out");
@@ -37,11 +37,13 @@ export default function Header() {
             class="pt-2 cursor-pointer"
           ></img>
         </Link>
-        <Dropdown
-          menuContent={renderMenuContent()}
-          dropDownButtons={dropDownButtons}
-          onMenuItemClicked={onMenuItemClicked}
-        />
+        {isAuthenticated && (
+          <Dropdown
+            menuContent={renderMenuContent()}
+            dropDownButtons={dropDownButtons}
+            onMenuItemClicked={onMenuItemClicked}
+          />
+        )}
       </div>
     </div>
   );
