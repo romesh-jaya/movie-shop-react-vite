@@ -7,7 +7,7 @@ export const fetchFeaturedTitles = createAsyncThunk(
   async () => {
     const response = await axios.get(
       `${import.meta.env.VITE_NODE_SERVER}/movies`,
-      { params: { featured: true, queryAll: true } }
+      { params: { featured: true, queryAll: true, fetchDetailsFromOmdb: true } }
     );
     return response.data.movies.movies;
   }

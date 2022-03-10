@@ -1,10 +1,10 @@
-import { MovieType } from "../../enums/MovieType";
+import { TitleType } from "../../enums/TitleType";
 import { portraitImage } from "../../constants/appConstants";
 
 interface IProps {
   title: string;
   year: string;
-  type: MovieType.Movie | MovieType.TvSeries;
+  type: TitleType.Movie | TitleType.TvSeries;
   mediaURL?: string;
   imdbID: string;
 }
@@ -42,7 +42,7 @@ export default function TitlePreview(props: IProps) {
         <div class="flex">
           <div class="flex-1">{year}</div>
           <div class="rounded-sm border-[1px] border-solid border-white px-1">
-            {type === MovieType.Movie ? "mov" : "tv"}
+            {type === TitleType.Movie ? "mov" : "tv"}
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MovieLibrary } from "../../../../types/MovieLibrary";
+import { Title } from "../../../../types/Title";
 import extraReducersFunctions from "./functions";
 
 export interface IFeaturedTitlesState {
-  value: MovieLibrary[];
+  value: Title[];
   loading: boolean;
   error: string;
   fetched: boolean;

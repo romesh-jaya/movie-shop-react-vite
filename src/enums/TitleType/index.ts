@@ -1,4 +1,4 @@
-export enum MovieType {
+export enum TitleType {
   TvSeries = "series",
   Movie = "movie",
 }

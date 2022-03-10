@@ -7,7 +7,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 
-import { MovieLibrary } from "../../types/MovieLibrary";
+import { Title } from "../../types/Title";
 import TitlePreview from "../TitlePreview";
 import { screenXlPx } from "../../constants/appConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ const arrowBtnStyles =
 
 interface IProps {
   sectionTitle: string;
-  titles: MovieLibrary[];
+  titles: Title[];
 }
 
 export default function TitleCarousel(props: IProps) {
@@ -40,7 +40,7 @@ export default function TitleCarousel(props: IProps) {
   useEffect(() => {
     // use the same width constraints as for the container
     setContainerWidth(
-      windowWidth > screenXlPx ? screenXlPx : windowWidth * (11 / 12)
+      (windowWidth > screenXlPx ? screenXlPx : windowWidth) * (11 / 12)
     );
   }, [windowWidth]);
 
@@ -73,7 +73,7 @@ export default function TitleCarousel(props: IProps) {
         step={visibleSlidesAtATime}
         isIntrinsicHeight
       >
-        <Slider style={{ width: `${containerWidth}px` }}>
+        <Slider style={{ width: `${containerWidth}px`, margin: "auto" }}>
           {renderSlides()}
         </Slider>
         <ButtonBack class={arrowBtnStyles + " left-0"}>
