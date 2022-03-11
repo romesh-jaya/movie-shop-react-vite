@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -7,13 +8,15 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
 import store from "./redux";
-import Login from "./components/Login/Login";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Home from "./components/Home/Home";
+import PrivateRoute from "./components/PrivateRoute";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "./axios";
+
+const Login = React.lazy(() => import("./components/Login"));
+const Home = React.lazy(() => import("./components/Home"));
+const Search = React.lazy(() => import("./components/Search"));
 
 library.add(faGear, faAngleLeft, faAngleRight);
 
@@ -39,12 +42,15 @@ function App() {
         <div class="flex flex-col items-center min-h-full bg-black">
           <Header />
           <div class="flex flex-col flex-1 max-w-screen-xl w-11/12 align-middle justify-center">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/" element={<PrivateRoute />}>
-                <Route path="/" element={<Home />} />
-              </Route>
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<PrivateRoute />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/search" element={<Search />} />
+                </Route>
+              </Routes>
+            </Suspense>
           </div>
         </div>
       </BrowserRouter>

@@ -1,9 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
-import Spinner from "../../common/Spinner/Spinner";
 import { useAppDispatch, useAppSelector } from "../../redux";
 import { fetchFeaturedTitles } from "../../redux/slices/titles/featured-titles/functions";
 import HeroCarousel from "../HeroCarousel";
+import Layout from "../Layout";
 import TitleCarousel from "../TitleCarousel";
 
 const Home = () => {
@@ -15,7 +15,11 @@ const Home = () => {
     loading: loadingData,
     fetched,
   } = useAppSelector((state) => state.featuredTitles);
-  let renderContent;
+  const errorText = fetchError
+    ? "There was an error fetching data from server. Please contact Admin"
+    : authError
+    ? "There was an error with Authentication. Please contact Admin"
+    : "";
 
   useEffect(() => {
     user;
@@ -24,22 +28,8 @@ const Home = () => {
     }
   }, [fetched, isAuthenticated]);
 
-  if (isLoading || loadingData) {
-    renderContent = <Spinner />;
-  } else if (authError) {
-    renderContent = (
-      <p class="text-red text-center">
-        There was an error with Authentication. Please contact Admin
-      </p>
-    );
-  } else if (fetchError) {
-    renderContent = (
-      <p class="text-red text-center">
-        There was an error fetching data from server. Please contact Admin
-      </p>
-    );
-  } else {
-    renderContent = (
+  const renderContent = () => {
+    return (
       <div>
         <HeroCarousel />
         {featuredTitles.length > 0 && (
@@ -47,9 +37,15 @@ const Home = () => {
         )}
       </div>
     );
-  }
+  };
 
-  return <div class="grid place-items-center">{renderContent}</div>;
+  return (
+    <div class="grid place-items-center">
+      <Layout loading={isLoading || loadingData} errorText={errorText}>
+        {renderContent()}
+      </Layout>
+    </div>
+  );
 };
 
 export default Home;
