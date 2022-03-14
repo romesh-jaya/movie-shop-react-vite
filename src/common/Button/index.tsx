@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 interface IProps {
   children: ReactNode;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function Button(props: IProps) {
