@@ -108,11 +108,11 @@ const Search = () => {
       <>
         <div class="w-full flex flex-wrap gap-4 my-4">
           <div class="flex w-full items-center mb-3">
-            <div className="flex-1 text-3xl font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
+            <div className="flex-1 md:text-3xl font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
               {title}
             </div>
             <div
-              class="text-right cursor-pointer hover-hover:hover:text-link-hover active:text-link-hover"
+              class="text-right text-sm md:text-base cursor-pointer hover-hover:hover:text-link-hover active:text-link-hover"
               onClick={() => navigate("/")}
             >
               &#60;BACK
@@ -132,8 +132,14 @@ const Search = () => {
         {resultCount > currentResultOffset + pageSize && (
           <div class="my-6">
             <Button disabled={loadingButton} onClick={onLoadMoreTitlesClicked}>
-              {loadingButton && <Spinner />}
-              Load more titles
+              <div class="flex">
+                {loadingButton && (
+                  <div class="mx-2">
+                    <Spinner inline />
+                  </div>
+                )}
+                Load more titles
+              </div>
             </Button>
           </div>
         )}

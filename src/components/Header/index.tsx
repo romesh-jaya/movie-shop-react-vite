@@ -1,21 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Dropdown from "../../common/Dropdown/Dropdown";
 import { Menu } from "@headlessui/react";
 import { NameValue } from "../../types/NameValue";
 import { useAuth0 } from "@auth0/auth0-react";
 import { menuLinks } from "../../constants/menuLinks";
+import { useWindowWidth } from "@react-hook/window-size";
+import { useCallback } from "react";
+import { screenSmPx } from "../../constants/appConstants";
+import { TitleType } from "../../enums/TitleType";
 
 const isRunningOnServer = typeof window === "undefined";
 
-const dropDownButtons: NameValue[] = [{ name: "logout", value: "Logout" }];
-
 export default function Header() {
   const { logout, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+  const windowWidth = useWindowWidth();
+
+  const getDropDownButtons = useCallback((): NameValue[] => {
+    const buttons = [{ name: "logout", value: "Logout" }];
+    if (windowWidth < screenSmPx) {
+      buttons.push(
+        { name: TitleType.Movie, value: "Movies" },
+        { name: TitleType.TvSeries, value: "TV series" }
+      );
+    }
+
+    return buttons;
+  }, [windowWidth]);
+
   const onMenuItemClicked = (dropDownButtonName: string) => {
     if (dropDownButtonName === "logout") {
       console.info("Sign out");
       logout({ returnTo: `${window.location.origin}/login` });
+      return;
+    }
+    if (
+      dropDownButtonName === TitleType.Movie ||
+      dropDownButtonName === TitleType.TvSeries
+    ) {
+      navigate(`/search?type=${dropDownButtonName}`);
       return;
     }
   };
@@ -80,7 +104,7 @@ export default function Header() {
         {isAuthenticated && (
           <Dropdown
             menuContent={renderMenuContent()}
-            dropDownButtons={dropDownButtons}
+            dropDownButtons={getDropDownButtons()}
             onMenuItemClicked={onMenuItemClicked}
           />
         )}

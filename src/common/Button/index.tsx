@@ -1,12 +1,11 @@
-import { ReactNode } from "react";
+import { FunctionComponent } from "react";
 
 interface IProps {
-  children: ReactNode;
   disabled?: boolean;
   onClick?: () => void;
 }
 
-export default function Button(props: IProps) {
+const Button: FunctionComponent<IProps> = (props) => {
   const { children, onClick, disabled = false } = props;
   return (
     <button
@@ -17,4 +16,6 @@ export default function Button(props: IProps) {
       {children}
     </button>
   );
-}
+};
+
+export default Button;
