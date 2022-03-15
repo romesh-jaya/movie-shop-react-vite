@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "../../axios";
 import Button from "../../common/Button";
 import Spinner from "../../common/Spinner/Spinner";
@@ -11,19 +12,26 @@ import TitlePreview from "../TitlePreview";
 const pageSize = 10;
 
 const Search = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const type = searchParams.get("type");
   const { isLoading, error: authError } = useAuth0();
   const [queryExecuted, setQueryExecuted] = useState(false);
   const [titles, setTitles] = useState<Title[]>([]);
-  //const resultForText = keyword ? "Result for: " + keyword : `Filter titles`;
-  //const title = keyword || type ? titleBase + " - " + resultForText : "";
+  const title = type === TitleType.Movie ? "Browse Movies" : "Browse TV Series";
   const [loading, setLoading] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loadingError, setLoadingError] = useState(false);
   const [resultCount, setResultCount] = useState(0);
   const [currentResultOffset, setCurrentResultOffset] = useState(0);
-  //const [queryInput, setQueryInput] = useState("");
 
-  const errorText = loadingError
+  const isTitleTypeValid = () => {
+    return type === TitleType.Movie || type === TitleType.TvSeries;
+  };
+
+  const errorText = !isTitleTypeValid()
+    ? "Invalid title type"
+    : loadingError
     ? "There was an error fetching data from server. Please contact Admin"
     : authError
     ? "There was an error with Authentication. Please contact Admin"
@@ -40,6 +48,10 @@ const Search = () => {
 
   const executeQuery = useCallback(
     async (setLoadingInComponent: boolean, queryOffset?: number) => {
+      if (!isTitleTypeValid()) {
+        return;
+      }
+
       try {
         setLoadingInComponent && setLoading(true);
         !setLoadingInComponent && setLoadingButton(true);
@@ -56,7 +68,7 @@ const Search = () => {
               pageSize,
               currentPage: offset / pageSize,
               fetchDetailsFromOmdb: true,
-              searchType: TitleType.Movie,
+              searchType: type,
             },
           }
         );
@@ -84,17 +96,28 @@ const Search = () => {
         setLoadingButton(false);
       }
     },
-    []
+    [type]
   );
 
   useEffect(() => {
     executeQuery(true);
-  }, []);
+  }, [type]);
 
   const renderContent = () => {
     return (
       <>
         <div class="w-full flex flex-wrap gap-4 my-4">
+          <div class="flex w-full items-center mb-3">
+            <div className="flex-1 text-3xl font-semibold whitespace-nowrap text-ellipsis overflow-hidden">
+              {title}
+            </div>
+            <div
+              class="text-right cursor-pointer hover-hover:hover:text-link-hover active:text-link-hover"
+              onClick={() => navigate("/")}
+            >
+              &#60;BACK
+            </div>
+          </div>
           {titles.map((title) => (
             <TitlePreview
               key={title.imdbID}

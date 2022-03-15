@@ -4,6 +4,9 @@ import Dropdown from "../../common/Dropdown/Dropdown";
 import { Menu } from "@headlessui/react";
 import { NameValue } from "../../types/NameValue";
 import { useAuth0 } from "@auth0/auth0-react";
+import { menuLinks } from "../../constants/menuLinks";
+
+const isRunningOnServer = typeof window === "undefined";
 
 const dropDownButtons: NameValue[] = [{ name: "logout", value: "Logout" }];
 
@@ -17,9 +20,45 @@ export default function Header() {
     }
   };
 
+  const getPathnameWithSearch = () => {
+    if (!isRunningOnServer) {
+      return window?.location.pathname + window?.location.search;
+    }
+    return "";
+  };
+
+  const renderLinksDesktop = () => {
+    const linkClass =
+      "hover-hover:hover:text-link-hover active:text-link-hover ";
+
+    return (
+      <ul class="flex justify-start flex-wrap text-base mx-10">
+        {menuLinks.map((link) => {
+          return (
+            <li key={link.key} class="mx-2">
+              <Link
+                to={link.link}
+                class={
+                  linkClass +
+                  `${
+                    getPathnameWithSearch() === link.link
+                      ? "text-link-hover"
+                      : ""
+                  }`
+                }
+              >
+                {link.key}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
   const renderMenuContent = () => {
     return (
-      <Menu.Button class="shrink-0 w-12 h-12 grid place-items-center">
+      <Menu.Button class="shrink-0 w-12 h-12 grid place-items-center hover-hover:hover:text-link-hover active:text-link-hover">
         <FontAwesomeIcon icon="gear" />
       </Menu.Button>
     );
@@ -37,6 +76,7 @@ export default function Header() {
             class="pt-2 cursor-pointer"
           ></img>
         </Link>
+        <div class="flex-1 hidden md:block">{renderLinksDesktop()}</div>
         {isAuthenticated && (
           <Dropdown
             menuContent={renderMenuContent()}
