@@ -2,8 +2,8 @@ import { FunctionComponent, ReactElement } from "react";
 import Spinner from "../../common/Spinner/Spinner";
 
 interface IProps {
-  loading: boolean;
-  errorText: string;
+  loading?: boolean;
+  errorText?: string;
 }
 
 const Layout: FunctionComponent<IProps> = ({
