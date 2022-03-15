@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, ReactElement } from "react";
+import { useEffect, useState, ReactElement } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -26,7 +26,6 @@ interface IProps {
 
 export default function TitleCarousel(props: IProps) {
   const { sectionTitle, titles } = props;
-  const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
   // get the thumbnailWidth dynamically from CSS variable
@@ -64,7 +63,7 @@ export default function TitleCarousel(props: IProps) {
 
   // Note: naturalSlideWidth and naturalSlideHeight are ignored when isIntrinsicHeight is set
   return visibleSlidesAtATime > 0 ? (
-    <div class="w-full relative" ref={containerRef}>
+    <div class="w-full relative">
       <div class="w-full text-base font-bold mb-4">{sectionTitle}</div>
       <CarouselProvider
         naturalSlideWidth={3}

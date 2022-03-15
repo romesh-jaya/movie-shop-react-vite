@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux";
 import { fetchFeaturedTitles } from "../../redux/slices/titles/featured-titles/functions";
 import HeroCarousel from "../HeroCarousel";
@@ -9,6 +9,7 @@ import TitleCarousel from "../TitleCarousel";
 const Home = () => {
   const dispatch = useAppDispatch();
   const { isLoading, error: authError, isAuthenticated, user } = useAuth0();
+  const [carouselLoaded, setCarouselLoaded] = useState(false); // This is to prevent CLS of Featured titles
   const {
     error: fetchError,
     value: featuredTitles,
@@ -30,12 +31,15 @@ const Home = () => {
 
   const renderContent = () => {
     return (
-      <div>
-        <HeroCarousel />
-        {featuredTitles.length > 0 && (
+      <>
+        <HeroCarousel
+          setCarouselLoaded={setCarouselLoaded}
+          carouselLoaded={carouselLoaded}
+        />
+        {carouselLoaded && featuredTitles.length > 0 && (
           <TitleCarousel sectionTitle="Featured" titles={featuredTitles} />
         )}
-      </div>
+      </>
     );
   };
 
