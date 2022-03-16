@@ -1,4 +1,4 @@
-export const portraitImage = "/images/portrait-image.jpg";
+export const blankMoviePoster = "/images/portrait-image.jpg";
 
 export const titleBase = "Ultra Movie Shop";
 

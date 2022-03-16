@@ -37,7 +37,7 @@ export default function TitleCarousel(props: IProps) {
   const windowWidth = useWindowWidth();
 
   useEffect(() => {
-    // use the same width constraints as for the container
+    // Note: must use the same width constraints as for the container
     setContainerWidth(
       (windowWidth > screenXlPx ? screenXlPx : windowWidth) * (11 / 12)
     );

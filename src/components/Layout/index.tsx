@@ -6,6 +6,7 @@ interface IProps {
   errorText?: string;
 }
 
+// Shows the loading spinner and errorText if applicable, Children if not
 const Layout: FunctionComponent<IProps> = ({
   loading,
   errorText,

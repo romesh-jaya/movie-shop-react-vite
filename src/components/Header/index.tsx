@@ -100,13 +100,15 @@ export default function Header() {
             class="pt-2 cursor-pointer"
           ></img>
         </Link>
-        <div class="flex-1 hidden md:block">{renderLinksDesktop()}</div>
         {isAuthenticated && (
-          <Dropdown
-            menuContent={renderMenuContent()}
-            dropDownButtons={getDropDownButtons()}
-            onMenuItemClicked={onMenuItemClicked}
-          />
+          <>
+            <div class="flex-1 hidden md:block">{renderLinksDesktop()}</div>
+            <Dropdown
+              menuContent={renderMenuContent()}
+              dropDownButtons={getDropDownButtons()}
+              onMenuItemClicked={onMenuItemClicked}
+            />
+          </>
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { TitleType } from "../../enums/TitleType";
-import { portraitImage } from "../../constants/appConstants";
+import { blankMoviePoster } from "../../constants/appConstants";
 
 interface IProps {
   title: string;
@@ -12,25 +12,11 @@ interface IProps {
 export default function TitlePreview(props: IProps) {
   const { title, year, type, mediaURL } = props;
 
-  /*
-  const onPosterClicked = () => {
-    const id = imdbID + "-" + prettyUrl(title);
-    router.push(
-      {
-        pathname: "/titles/[id]",
-        query: { id },
-      },
-      `/titles/${id}`,
-      { shallow: true }
-    );
-  };
-  */
-
   return (
     <div class="w-32 md:w-48 m-auto shrink-0">
       <div class="shrink-0 cursor-pointer hover-hover:hover:opacity-70 hover-hover:hover:outline-2 hover-hover:hover:outline-white hover-hover:hover:outline">
         <img
-          src={mediaURL ?? portraitImage}
+          src={mediaURL ?? blankMoviePoster}
           alt={title}
           class="w-32 h-48 md:w-48 md:h-72"
         />

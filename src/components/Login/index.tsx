@@ -1,10 +1,10 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import Spinner from "../../common/Spinner/Spinner";
 import { useLocation, Navigate } from "react-router-dom";
 import Button from "../../common/Button";
 import { titleBase } from "../../constants/appConstants";
+import Layout from "../Layout";
 
 // Note: the Auth0 hosted Universal classic login screen has been customized in order to pass a custom
 //       param - passwordLoginOnly. The customized login screen can be accessed via:
@@ -32,32 +32,37 @@ const Login: React.FC = () => {
     loginWithRedirect();
   };
 
-  if (isLoading) {
-    return (
-      <div class="grid place-items-center">
-        <Spinner />
+  const renderContent = () => {
+    return !isAuthenticated ? (
+      <div class="w-full m-auto text-center">
+        <div class="mt-5">
+          {!isAdminLogin &&
+            `Welcome! Sign in to browse movies and TV series at ${titleBase}`}
+        </div>
+        <div className="pt-10 text-center">
+          <Button onClick={onLogin}>
+            {isAdminLogin ? "Sign in - Admin" : "Sign in"}
+          </Button>
+        </div>
       </div>
+    ) : (
+      <Navigate to="/" />
     );
-  }
+  };
 
-  if (error) {
-    return <p class="text-red">{error}</p>;
-  }
-
-  return !isAuthenticated ? (
-    <div class="w-full m-auto text-center">
-      <div class="mt-5">
-        {!isAdminLogin &&
-          `Welcome! Sign in to browse movies and TV series at ${titleBase}`}
-      </div>
-      <div className="pt-10 text-center">
-        <Button onClick={onLogin}>
-          {isAdminLogin ? "Sign in - Admin" : "Sign in"}
-        </Button>
-      </div>
+  return (
+    <div class="grid place-items-center">
+      <Layout
+        loading={isLoading}
+        errorText={
+          error
+            ? "There was an error in Authentication. Please contact Admin"
+            : ""
+        }
+      >
+        {renderContent()}
+      </Layout>
     </div>
-  ) : (
-    <Navigate to="/" />
   );
 };
 
