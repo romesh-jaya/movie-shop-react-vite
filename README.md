@@ -3,7 +3,7 @@
 The website is meant to be used by a company renting DVD's. The website displays the available titles (movies/TV series). The website is responsive for mobile and tablet devices. You may login with any Google account to have access to the website.
 
 Site is hosted here:
-https://movie-shop-vite.web.app/
+https://movie-shop-react-without-admin.web.app/
 
 ## Screenshots
 
@@ -38,3 +38,7 @@ Browse Titles
 - Husky pre-commit hooks
 - Auth0 Authentication
 - Fontawesome icons
+
+## .env variables
+
+All fields mentioned in .env.example must be filled with correct values and renamed as .env.
